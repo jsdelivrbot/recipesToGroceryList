@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addRecipe } from '../actions/index';
+import { bindActionCreators } from 'redux';
+import Recipe from '../components/recipe'
 
 class RecipeList extends Component {
     renderList() {
         return this.props.recipes.map(recipe => {
             return (
-                <li>
+                <li key={recipe.name}
+                    onClick={() => this.props.addRecipe(recipe)}>
                     {recipe.name}
                 </li>
             )
@@ -15,14 +19,21 @@ class RecipeList extends Component {
     render() {
         return (
             <ul>
-                {this.renderList()}
+                {/*{this.renderList()}*/}
+                {this.props.recipes.map(r => <Recipe key={r.name} recipe={r} clickFunc={this.props.addRecipe}/>)}
             </ul>
         )
     }
 }
 
 function mapStateToProps(state) {
-    books: state.books
+    return {
+        recipes: state.recipes
+    }
 }
 
-export default connect(mapStateToProps)(RecipeList)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ addRecipe}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
