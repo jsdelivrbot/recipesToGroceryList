@@ -1,8 +1,10 @@
 export default function() {
     return [
         {
-            "name": "Veggetti Alfredo",
-            "ingredients": [
+            name: "Veggetti Alfredo",
+            active: false,
+            count: 0,
+            ingredients: [
                 "Zucchini",
                 "Cream Cheese",
                 "Half & Half",
@@ -11,15 +13,19 @@ export default function() {
             ]
         },
         {
-            "name": "Veggetti Marinara",
-            "ingredients": [
+            name: "Veggetti Marinara",
+            active: false,
+            count: 0,
+            ingredients: [
                 "Zucchini",
                 "Marinara"
             ]
         },
         {
-            "name": "Broccoli Stirfry",
-            "ingredients": [
+            name: "Broccoli Stirfry",
+            active: false,
+            count: 0,
+            ingredients: [
                 "Chicken",
                 "Broccoli",
                 "Soy Sauce",
@@ -27,8 +33,10 @@ export default function() {
             ]
         },
         {
-            "name": "Burgers",
-            "ingredients": [
+            name: "Burgers",
+            active: false,
+            count: 0,
+            ingredients: [
                 "Beef Patties",
                 "Cheese",
                 "Vegetable of Choice"
