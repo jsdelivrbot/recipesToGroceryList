@@ -2,23 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class ActiveRecipes extends Component {
+    renderActives() {
+        return (
+            this.props.recipes.map(recipe => {
+                if (recipe.active === true) {
+                    return (
+                        <li key={recipe.name}>
+                            {recipe.name}
+                        </li>
+                    )
+                }
+            })
+        )
+    }
+
     renderList() {
         let ingredients = {};
-        this.props.activeRecipes.map(ar => {
-           ar.ingredients.map(ingredient => {
-             if (ingredient in ingredients) {
-                 ingredients[ingredient] += 1;
-             }
-             else {
-                 ingredients[ingredient] = 1;
-             }
-           })
+        this.props.recipes.map(recipe => {
+            if (recipe.active === true) {
+                recipe.ingredients.map(ingredient => {
+                    if (ingredient in ingredients) {
+                        ingredients[ingredient] += 1;
+                    }
+                    else {
+                        ingredients[ingredient] = 1;
+                    }
+                })
+            }
         });
 
-        return Object.keys(ingredients).map(k => {
+        return Object.keys(ingredients).map(key => {
             return (
-                <li key={k}>
-                    {k}: {ingredients[k]}
+                <li key={key}>
+                    {key}: {ingredients[key]}
                 </li>
             )
         });
@@ -30,6 +46,9 @@ class ActiveRecipes extends Component {
             <div>
                 <h2>Active Recipes:</h2>
                 <ul>
+                    {this.renderActives()}
+                </ul>
+                <ul>
                     {this.renderList()}
                 </ul>
             </div>
@@ -39,7 +58,7 @@ class ActiveRecipes extends Component {
 
 function mapStateToProps(state) {
     return {
-        activeRecipes: state.activeRecipes
+        recipes: state.recipes
     }
 }
 

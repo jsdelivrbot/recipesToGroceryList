@@ -1,4 +1,19 @@
-export default function() {
+export default function(state, action) {
+    switch(action.type) {
+        case 'ADD_RECIPE':
+            let toggledRecipe = action.payload;
+            let newState = [];
+            state.map(recipe => {
+                if (toggledRecipe.name == recipe.name){
+                    toggledRecipe.active = !toggledRecipe.active;
+                    newState.push(toggledRecipe);
+                }
+                else {
+                    newState.push(recipe);
+                }
+            });
+            return newState;
+    }
     return [
         {
             name: "Veggetti Alfredo",
